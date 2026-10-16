@@ -6,7 +6,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
-COUNT = 10
+COUNT = int(os.environ.get("COUNT", "10"))
+
+if not 1 <= COUNT <= 1000:
+    raise SystemExit("ERROR: COUNT must be between 1 and 1000.")
 source = Path("source.svg")
 
 if not source.is_file():
